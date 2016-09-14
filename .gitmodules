@@ -1,0 +1,6 @@
+[submodule "tmux-continuum"]
+	path = tmux-continuum
+	url = /Users/bcostolo/.tmux/plugins/tmux-continuum/
+[submodule "delimitMate.vim"]
+	path = delimitMate.vim
+	url = /Users/bcostolo/.vim/bundle/delimitMate.vim/

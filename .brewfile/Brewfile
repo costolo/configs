@@ -1,0 +1,90 @@
+
+# tap repositories and their packages
+
+tap caskroom/cask
+cask xquartz
+
+tap homebrew/core
+brew atk
+brew autoconf
+brew automake
+brew cairo
+brew couchdb
+brew erlang
+brew fontconfig
+brew freetype
+brew gcc
+brew gdbm
+brew gdk-pixbuf
+brew gettext
+brew git
+brew glib
+brew gmp
+brew gnutls
+brew gobject-introspection
+brew gtk+
+brew harfbuzz
+brew heroku
+brew hicolor-icon-theme
+brew icu4c
+brew isl
+brew jpeg
+brew libevent
+brew libffi
+brew libgcrypt
+brew libgpg-error
+brew libidn
+brew libksba
+brew libmpc
+brew libotr
+brew libpng
+brew libtasn1
+brew libtiff
+brew libtool
+brew libyaml
+brew lua
+brew macvim --HEAD
+brew mas
+brew mongodb
+brew mpfr
+brew nettle
+brew nmap
+brew node
+brew nspr
+brew openssl
+brew pango
+brew pcre
+brew pidgin
+brew pixman
+brew pkg-config
+brew postgresql
+brew python3
+brew readline
+brew reattach-to-user-namespace
+brew redis
+brew slackcat
+brew spidermonkey
+brew sqlite
+brew tmux
+brew wxmac
+brew xz
+brew zeromq
+
+tap homebrew/science
+brew r
+
+tap macvim-dev/macvim
+
+tap rcmdnk/file
+brew brew-file
+
+# App Store applications
+appstore 406056744 Evernote
+appstore 682658836 GarageBand
+appstore 409183694 Keynote
+appstore 409203825 Numbers
+appstore 409201541 Pages
+appstore 803453959 Slack
+appstore 497799835 Xcode
+appstore 408981434 iMovie
+appstore 408981381 iPhoto

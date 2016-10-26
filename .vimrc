@@ -1,28 +1,35 @@
+syntax enable
 set autoread
-" install vundle from https://github.com/VundleVim/Vundle.vim
-" set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 set backspace=indent,eol,start
-set cino=:0 " No indent for case:/default:
-set shiftwidth=4
 set mouse=a
-set tabstop=4
 set pastetoggle=<f10>
 set laststatus=2
 set statusline=%f "tail of the filename"
+set tabstop=8 softtabstop=0 expandtab shiftwidth=2 smarttab
+set number
+set background=dark
+
+ let g:syntastic_javascript_checkers = ['standard']
+let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/snippets.json')), "\n"))
 
 " custom binds
 let mapleader = "\<Space>"
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :wq<CR>
 nnoremap <Leader>Y :%y+<CR>
+nnoremap <Leader>' :%s/"/'/g<CR>
 inoremap <Leader><Right> <C-o>$
 inoremap <Leader><Left> <C-o>0
+nmap <C-f> gg=G''
+imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 vnoremap // y/<C-R>"<CR>"
 vmap <Leader>y "+y"
-map <c-f> :Autoformat<cr>
 
-" plugins go here
+filetype plugin indent on    " required
+
+" install vundle from https://github.com/VundleVim/Vundle.vim
+" set the runtime path to include Vundle and initialize
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
@@ -33,43 +40,17 @@ Plugin 'VundleVim/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/syntastic'
 Plugin 'delimitMate.vim'
 Plugin 'justinmk/vim-sneak'
 Plugin 'mattn/emmet-vim'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'Chiel92/vim-autoformat'
+Plugin 'mattn/webapi-vim'
 Plugin 'terryma/vim-multiple-cursors'
-
-set number
-syntax enable
-set background=dark
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'christoomey/vim-tmux-navigator'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
-
-let g:javascript_enable_domhtmlcss = 1
-
-" syntastic settings
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-
-" let g:syntastic_javascript_checkers = ['eslint']
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-" filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx

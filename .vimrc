@@ -10,18 +10,26 @@ set tabstop=8 softtabstop=0 expandtab shiftwidth=2 smarttab
 set number
 set background=dark
 
- let g:syntastic_javascript_checkers = ['standard']
+let g:syntastic_javascript_checkers = ['standard']
 let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/snippets.json')), "\n"))
 
 " custom binds
 let mapleader = "\<Space>"
 nnoremap <Leader>w :w<CR>
+" space + q to write and quit
 nnoremap <Leader>q :wq<CR>
 nnoremap <Leader>Y :%y+<CR>
+" globally replace double quotes with single quotes
 nnoremap <Leader>' :%s/"/'/g<CR>
+" remap normal mode paste to paste w/ proper indentation
+nnoremap p p=`]
+nnoremap <c-p> p
+" space + left or right jumps to corresponding EOL or BOL
 inoremap <Leader><Right> <C-o>$
 inoremap <Leader><Left> <C-o>0
+" fix indentation across entire file
 nmap <C-f> gg=G''
+" emmet 
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 vnoremap // y/<C-R>"<CR>"
 vmap <Leader>y "+y"

@@ -54,13 +54,15 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
-Plugin 'delimitMate.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Raimondi/delimitMate'
 Plugin 'justinmk/vim-sneak'
 Plugin 'mattn/emmet-vim'
 Plugin 'mattn/webapi-vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'tpope/vim-surround.git'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

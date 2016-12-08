@@ -12,6 +12,7 @@ set background=dark
 
 let g:syntastic_javascript_checkers = ['standard']
 let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/snippets.json')), "\n"))
+let g:delimitMate_expand_cr = 1
 
 " custom binds
 let mapleader = "\<Space>"

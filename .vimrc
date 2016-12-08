@@ -32,6 +32,8 @@ inoremap <Leader><Left> <C-o>0
 nmap <C-f> gg=G''
 " emmet 
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+" nerdtreetoggle binding
+map <C-g> :NERDTreeToggle<CR>
 vnoremap // y/<C-R>"<CR>"
 vmap <Leader>y "+y"
 

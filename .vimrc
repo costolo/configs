@@ -1,18 +1,33 @@
+" syntax highlighting
+autocmd BufNewFile,BufReadPost *.jade set filetype=pug
+autocmd BufNewFile,BufReadPost *.pug set filetype=pug
+
+" prettier formatting
+autocmd FileType javascript set formatprg=prettier\ --stdin
+
 syntax enable
 set autoread
 set rtp+=~/.vim/bundle/Vundle.vim
 set backspace=indent,eol,start
 set mouse=a
-set pastetoggle=<f10>
 set laststatus=2
 set statusline=%f "tail of the filename"
 set tabstop=8 softtabstop=0 expandtab shiftwidth=2 smarttab
 set number
 set background=dark
 
-let g:syntastic_javascript_checkers = ['standard']
+" plugin settings
+let g:syntastic_javascript_checkers=['standard']
+" let g:syntastic_javascript_standard_exec = 'semistandard'
 let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/snippets.json')), "\n"))
 let g:delimitMate_expand_cr = 1
+let g:NERDSpaceDelims = 1
+let g:vim_jsx_pretty_colorful_config = 1
+let g:jsx_ext_required = 0
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
 " custom binds
 let mapleader = "\<Space>"
@@ -26,9 +41,9 @@ nnoremap <Leader>' :%s/"/'/g<CR>
 nnoremap p p=`]
 nnoremap <c-p> p
 " space + left or right jumps to corresponding EOL or BOL
-inoremap <Leader><Right> <C-o>$
-inoremap <Leader><Left> <C-o>0
-" fix indentation across entire file
+" inoremap <Leader><Right> <C-o>$
+" inoremap <Leader><Left> <C-o>0
+" fix indentation across entire file 
 nmap <C-f> gg=G''
 " emmet 
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
@@ -51,7 +66,8 @@ Plugin 'VundleVim/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
+Plugin 'MaxMEllon/vim-jsx-pretty'
+" Plugin 'mxw/vim-jsx'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
@@ -63,6 +79,8 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tpope/vim-surround.git'
+Plugin 'digitaltoad/vim-pug'
+Plugin 'ctrlpvim/ctrlp.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

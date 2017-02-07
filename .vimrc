@@ -1,27 +1,31 @@
-" syntax highlighting
-autocmd BufNewFile,BufReadPost *.jade set filetype=pug
-autocmd BufNewFile,BufReadPost *.pug set filetype=pug
-
-" prettier formatting
-autocmd FileType javascript set formatprg=prettier\ --stdin
+" options
 
 syntax enable
+set nocompatible
+set autoindent
 set autoread
-set rtp+=~/.vim/bundle/Vundle.vim
 set backspace=indent,eol,start
-set mouse=a
+set expandtab 
+set ignorecase
 set laststatus=2
-set statusline=%f "tail of the filename"
-set tabstop=8 softtabstop=0 expandtab shiftwidth=2 smarttab
+set mouse=a
 set number
-set background=dark
+set rtp+=~/.vim/bundle/vundle.vim
+set shiftwidth=2 
+set showmatch
+set smartcase
+set smarttab 
+set softtabstop=0 
+set statusline=%f "tail of the filename"
+set tabstop=8 
 
 " plugin settings
+
 let g:syntastic_javascript_checkers=['standard']
 " let g:syntastic_javascript_standard_exec = 'semistandard'
 let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/snippets.json')), "\n"))
-let g:delimitMate_expand_cr = 1
-let g:NERDSpaceDelims = 1
+let g:delimitmate_expand_cr = 1
+let g:nerdspacedelims = 1
 let g:vim_jsx_pretty_colorful_config = 1
 let g:jsx_ext_required = 0
 let g:ctrlp_map = '<c-p>'
@@ -30,10 +34,12 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
 " custom binds
+
 let mapleader = "\<Space>"
 nnoremap <Leader>w :w<CR>
 " space + q to write and quit
 nnoremap <Leader>q :wq<CR>
+" space + Y to copy contents of file
 nnoremap <Leader>Y :%y+<CR>
 " globally replace double quotes with single quotes
 nnoremap <Leader>' :%s/"/'/g<CR>
@@ -43,7 +49,7 @@ nnoremap <c-p> p
 " space + left or right jumps to corresponding EOL or BOL
 " inoremap <Leader><Right> <C-o>$
 " inoremap <Leader><Left> <C-o>0
-" fix indentation across entire file 
+" fix indentation across entire file i could be typing
 nmap <C-f> gg=G''
 " emmet 
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
@@ -52,22 +58,15 @@ map <C-g> :NERDTreeToggle<CR>
 vnoremap // y/<C-R>"<CR>"
 vmap <Leader>y "+y"
 
-filetype plugin indent on    " required
+" plugins
 
-" install vundle from https://github.com/VundleVim/Vundle.vim
-" set the runtime path to include Vundle and initialize
+filetype off
+
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
 Plugin 'pangloss/vim-javascript'
-Plugin 'MaxMEllon/vim-jsx-pretty'
-" Plugin 'mxw/vim-jsx'
+" Plugin 'MaxMEllon/vim-jsx-pretty'
+Plugin 'mxw/vim-jsx'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
@@ -81,12 +80,19 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tpope/vim-surround.git'
 Plugin 'digitaltoad/vim-pug'
 Plugin 'ctrlpvim/ctrlp.vim'
-
-" All of your Plugins must be added before the following line
 call vundle#end()            " required
+
+" turn on filetype, plugin, and indent after vundle runs
+filetype plugin indent on
+
+" syntax highlighting for jsx, jade, and pug
+
 autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
+autocmd BufNewFile,BufReadPost *.jade set filetype=pug
+autocmd BufNewFile,BufReadPost *.pug set filetype=pug
 
 " Always paste in paste mode
+
 function! WrapForTmux(s)
   if !exists('$TMUX')
     return a:s

@@ -5,6 +5,8 @@ set nocompatible
 set autoindent
 set autoread
 set backspace=indent,eol,start
+set backupdir=$TMPDIR//
+set directory=$TMPDIR//
 set expandtab 
 set ignorecase
 set laststatus=2
@@ -22,7 +24,7 @@ set tabstop=8
 " plugin settings
 
 let g:syntastic_javascript_checkers=['standard']
-" let g:syntastic_javascript_standard_exec = 'semistandard'
+let g:syntastic_javascript_standard_exec = 'semistandard'
 let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/snippets.json')), "\n"))
 let g:delimitMate_expand_cr = 2
 let g:NERDSpaceDelims = 1
@@ -114,4 +116,3 @@ function! XTermPasteBegin()
 endfunction
 
 inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
-

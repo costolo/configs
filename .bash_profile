@@ -1,5 +1,3 @@
-echo "jacques cousteau could never get this low"
-
 # $VARIABLE will render before the rest of the command is executed
 echo "Logged in as $USER at $(hostname)"
 
@@ -14,6 +12,9 @@ test -d /usr/local/bin && export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PAT
 
 # Path for Heroku
 test -d /usr/local/heroku/ && export PATH="/usr/local/heroku/bin:$PATH"
+
+# Path for chromewebdriver
+export PATH="/Users/bcostolo/Downloads/chromedriver:$PATH"
 
 # Load git completions
 git_completion_script=/usr/local/etc/bash_completion.d/git-completion.bash
@@ -80,6 +81,8 @@ alias vino="mv node_modules/vinovate/*.js node_modules/vinovate/*.json ./ && npm
 alias copy="pwd | tr -d '\n' | pbcopy"
 alias wp="node_modules/.bin/webpack"
 alias bao="ssh ben@bvworks.lv5.org -p 24"
+alias delrepo="aws codecommit delete-repository --repository-name"
+alias amazon="ssh -i \"amazon_aws.pem\" ec2-user@ec2-54-210-162-81.compute-1.amazonaws.com"
 
 # useful functions (legacy at this point because tmux handles this well but why not keep it anyway)
 function tn {

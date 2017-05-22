@@ -1,6 +1,12 @@
 # $VARIABLE will render before the rest of the command is executed
 echo "Logged in as $USER at $(hostname)"
 
+# because duh
+source ~/.bashrc
+
+# thefuck alias
+eval $(thefuck --alias)
+
 # Rbenv autocomplete and shims
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
@@ -13,8 +19,8 @@ test -d /usr/local/bin && export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PAT
 # Path for Heroku
 test -d /usr/local/heroku/ && export PATH="/usr/local/heroku/bin:$PATH"
 
-# Path for chromewebdriver
-export PATH="/Users/bcostolo/Downloads/chromedriver:$PATH"
+# Path for NVM
+export PATH="/Users/bencostolo/.nvm/versions/node/v6.10.1/lib:$PATH"
 
 # Load git completions
 git_completion_script=/usr/local/etc/bash_completion.d/git-completion.bash
@@ -105,3 +111,6 @@ fi
 
 #load RVM into a shell session *as a function*
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

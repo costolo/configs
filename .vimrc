@@ -19,21 +19,35 @@ set smartcase
 set smarttab 
 set softtabstop=0 
 set statusline=%f "tail of the filename"
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 set tabstop=8 
+set timeoutlen=200
 
 " plugin settings
 
-let g:syntastic_javascript_checkers=['standard']
-let g:syntastic_javascript_standard_exec = 'semistandard'
-let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/snippets.json')), "\n"))
-let g:delimitMate_expand_cr = 2
-let g:NERDSpaceDelims = 1
-let g:vim_jsx_pretty_colorful_config = 1
-let g:jsx_ext_required = 0
-let g:ctrlp_map = '<c-p>'
+" TODO figure out what the fuck this snippet was
+" let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/snippets.json')), "\n"))
 let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_working_path_mode = 'ra'
+let g:delimitMate_expand_cr = 2
+let g:jsx_ext_required = 0
+let g:NERDSpaceDelims = 1
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exec = '/usr/local/bin/eslint'
+let g:vim_jsx_pretty_colorful_config = 1
+let g:user_emmet_settings = {
+\  'javascript' : {
+\    'extends' : 'jsx',
+\  },
+\}
 
 " custom binds
 
@@ -51,7 +65,7 @@ nnoremap <c-p> p
 " space + left or right jumps to corresponding EOL or BOL
 " inoremap <Leader><Right> <C-o>$
 " inoremap <Leader><Left> <C-o>0
-" fix indentation across entire file i could be typing
+" fix indentation across entire file
 nmap <C-f> gg=G''
 " emmet 
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
@@ -59,6 +73,7 @@ imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 map <C-g> :NERDTreeToggle<CR>
 vnoremap // y/<C-R>"<CR>"
 vmap <Leader>y "+y"
+inoremap <Leader><Leader> <C-o>$
 
 " plugins
 
@@ -82,6 +97,10 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tpope/vim-surround.git'
 Plugin 'digitaltoad/vim-pug'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'JulesWang/css.vim'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'vim-scripts/WebAPI.vim'
+Plugin 'Valloric/MatchTagAlways'
 call vundle#end()            " required
 
 " turn on filetype, plugin, and indent after vundle runs
@@ -90,6 +109,7 @@ filetype plugin indent on
 " syntax highlighting for jsx, jade, and pug
 
 autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
+autocmd BufNewFile,BufRead *.js set filetype=javascript.jsx
 autocmd BufNewFile,BufReadPost *.jade set filetype=pug
 autocmd BufNewFile,BufReadPost *.pug set filetype=pug
 

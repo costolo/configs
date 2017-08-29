@@ -20,7 +20,6 @@ set smarttab
 set softtabstop=0 
 set statusline=%f "tail of the filename"
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 set tabstop=8 
 set timeoutlen=200
@@ -36,12 +35,6 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:delimitMate_expand_cr = 2
 let g:jsx_ext_required = 0
 let g:NERDSpaceDelims = 1
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_exec = '/usr/local/bin/eslint'
 let g:vim_jsx_pretty_colorful_config = 1
 let g:user_emmet_settings = {
 \  'javascript' : {
@@ -82,10 +75,9 @@ filetype off
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'pangloss/vim-javascript'
-" Plugin 'MaxMEllon/vim-jsx-pretty'
 Plugin 'mxw/vim-jsx'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/syntastic'
+Plugin 'w0rp/ale'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Raimondi/delimitMate'
 Plugin 'justinmk/vim-sneak'
@@ -101,20 +93,25 @@ Plugin 'JulesWang/css.vim'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'vim-scripts/WebAPI.vim'
 Plugin 'Valloric/MatchTagAlways'
+Plugin 'StanAngeloff/php.vim'
+Plugin 'tikhomirov/vim-glsl'
 call vundle#end()            " required
 
 " turn on filetype, plugin, and indent after vundle runs
 filetype plugin indent on
 
 " syntax highlighting for jsx, jade, and pug
-
 autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
 autocmd BufNewFile,BufRead *.js set filetype=javascript.jsx
 autocmd BufNewFile,BufReadPost *.jade set filetype=pug
 autocmd BufNewFile,BufReadPost *.pug set filetype=pug
 
-" Always paste in paste mode
+" four spaces for tabs in php and python files
+autocmd Filetype php setlocal ts=4 sts=4 sw=4
+autocmd Filetype python setlocal ts=4 sts=4 sw=4
+autocmd Filetype glsl setlocal ts=4 sts=4 sw=4
 
+" Always paste in paste mode
 function! WrapForTmux(s)
   if !exists('$TMUX')
     return a:s

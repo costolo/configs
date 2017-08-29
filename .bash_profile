@@ -99,6 +99,11 @@ function wn {
   printf "\e]2;$1\a"
 }
 
+# find text in cwd
+findText() {
+  find ./ -type f -exec grep -H $1 {} \;
+}
+
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 
 ### Added by the Heroku Toolbelt

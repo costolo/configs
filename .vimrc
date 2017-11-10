@@ -94,10 +94,7 @@ Plugin 'JulesWang/css.vim'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'vim-scripts/WebAPI.vim'
 Plugin 'Valloric/MatchTagAlways'
-<<<<<<< HEAD
-=======
 Plugin 'StanAngeloff/php.vim'
->>>>>>> 8f3cee913dfa67d23c7bde57df1e42cbe59d5f09
 Plugin 'tikhomirov/vim-glsl'
 call vundle#end()            " required
 
@@ -110,19 +107,10 @@ autocmd BufNewFile,BufRead *.js set filetype=javascript.jsx
 autocmd BufNewFile,BufReadPost *.jade set filetype=pug
 autocmd BufNewFile,BufReadPost *.pug set filetype=pug
 
-<<<<<<< HEAD
 " 4 space tabs for various filetypes
 autocmd Filetype php setlocal ts=4 sts=4 sw=4
 autocmd Filetype python setlocal ts=4 sts=4 sw=4
 autocmd Filetype glsl setlocal ts=4 sts=4 sw=4
-
-" Always paste in paste mode
-=======
-" four spaces for tabs in php and python files
-autocmd Filetype php setlocal ts=4 sts=4 sw=4
-autocmd Filetype python setlocal ts=4 sts=4 sw=4
-autocmd Filetype glsl setlocal ts=4 sts=4 sw=4
->>>>>>> 8f3cee913dfa67d23c7bde57df1e42cbe59d5f09
 
 " Always paste in paste mode
 function! WrapForTmux(s)

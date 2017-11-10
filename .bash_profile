@@ -1,3 +1,7 @@
+# aws profile
+export AWS_PROFILE="pfs-staging"
+export AWS_REGION="us-east-1"
+
 # $VARIABLE will render before the rest of the command is executed
 echo "Logged in as $USER at $(hostname)"
 
@@ -13,6 +17,8 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 # Path for RBENV
 test -d $HOME/.rbenv/ && PATH="$HOME/.rbenv/bin:$PATH"
 
+export PATH="/Users/bencostolo/Library/Python/2.7/bin/:$PATH"
+
 # Path for brew
 test -d /usr/local/bin && export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
 
@@ -21,10 +27,6 @@ test -d /usr/local/heroku/ && export PATH="/usr/local/heroku/bin:$PATH"
 
 # Path for NVM
 export PATH="/Users/bencostolo/.nvm/versions/node/v6.10.1/lib:$PATH"
-
-# Load git completions
-git_completion_script=/usr/local/etc/bash_completion.d/git-completion.bash
-test -s $git_completion_script && source $git_completion_script
 
 # A more colorful prompt
 # \[\e[0m\] resets the color to default color
@@ -71,6 +73,15 @@ export GREP_OPTIONS='--color=always'
 #set vim as the default editor
 export EDITOR="vim"
 
+# git autocompletion
+if [ -f ~/.git-completion.bash ]; then
+  . ~/.git-completion.bash
+  
+  # Add git completion to aliases
+  __git_complete g __git_main
+  __git_complete pl _git_pull_origin
+fi
+
 # a plethora of aliases
 alias e=subl
 alias be="bundle exec"
@@ -83,12 +94,21 @@ alias s="rails s"
 alias gs="git status"
 alias k9="kill -9"
 alias n="node"
-alias vino="mv node_modules/vinovate/*.js node_modules/vinovate/*.json ./ && npm install"
 alias copy="pwd | tr -d '\n' | pbcopy"
 alias wp="node_modules/.bin/webpack"
-alias bao="ssh ben@bvworks.lv5.org -p 24"
-alias delrepo="aws codecommit delete-repository --repository-name"
-alias amazon="ssh -i \"amazon_aws.pem\" ec2-user@ec2-54-210-162-81.compute-1.amazonaws.com"
+alias nukeModules="rm -rf /node_modules && yarn"
+alias v="vagrant ssh"
+alias push="git push origin HEAD"
+alias pull="git pull origin HEAD"
+alias g="git"
+alias awsphi-prod='unset AWS_ACCESS_KEY_ID; unset AWS_SECRET_ACCESS_KEY; export AWS_PROFILE="pfs-production";'
+alias awsphi-qa='unset AWS_ACCESS_KEY_ID; unset AWS_SECRET_ACCESS_KEY; export AWS_PROFILE="pfs-staging";'
+alias reload="source ~/.bash_profile"
+alias ac="git add -A && git commit -v"
+alias errqa="awslogs get Aisles/error-logs --start='2 hours ago'"
+alias dev="git co develop"
+alias a="git add -A && git commit -v"
+alias ng="ngrok http 10.0.0.130:80"
 
 # useful functions (legacy at this point because tmux handles this well but why not keep it anyway)
 function tn {
@@ -101,7 +121,7 @@ function wn {
 
 # find text in cwd
 findText() {
-  find ./ -type f -exec grep -H $1 {} \;
+  find ./ -not \( -path node_modules -prune \) -not \( -path vendor -prune \) -not \( -path \.git -prune \) -type f  -exec grep -H "$1" {} \;
 }
 
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
@@ -119,3 +139,6 @@ fi
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+awsphi-qa
+

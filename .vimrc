@@ -1,6 +1,4 @@
 " options
-
-syntax enable
 set nocompatible
 set autoindent
 set autoread
@@ -26,12 +24,6 @@ set timeoutlen=200
 
 " plugin settings
 
-" TODO figure out what the fuck this snippet was
-" let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/snippets.json')), "\n"))
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_working_path_mode = 'ra'
 let g:delimitMate_expand_cr = 2
 let g:jsx_ext_required = 0
 let g:NERDSpaceDelims = 1
@@ -77,9 +69,8 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'scrooloose/nerdcommenter'
-" Plugin 'scrooloose/syntastic'
-Plugin 'w0rp/ale'
 Plugin 'scrooloose/nerdtree'
+Plugin 'w0rp/ale'
 Plugin 'Raimondi/delimitMate'
 Plugin 'justinmk/vim-sneak'
 Plugin 'mattn/emmet-vim'
@@ -89,28 +80,48 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tpope/vim-surround.git'
 Plugin 'digitaltoad/vim-pug'
-Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'wincent/Command-T'
 Plugin 'JulesWang/css.vim'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'vim-scripts/WebAPI.vim'
 Plugin 'Valloric/MatchTagAlways'
 Plugin 'StanAngeloff/php.vim'
+Plugin 'beanworks/vim-phpfmt'
 Plugin 'tikhomirov/vim-glsl'
+Plugin 'jwalton512/vim-blade'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'rust-lang/rust.vim'
+Plugin 'lumiliet/vim-twig'
+Plugin 'python-mode/python-mode'
+
 call vundle#end()            " required
 
 " turn on filetype, plugin, and indent after vundle runs
 filetype plugin indent on
+syntax enable
 
 " syntax highlighting for jsx, jade, and pug
 autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
 autocmd BufNewFile,BufRead *.js set filetype=javascript.jsx
+autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript
 autocmd BufNewFile,BufReadPost *.jade set filetype=pug
 autocmd BufNewFile,BufReadPost *.pug set filetype=pug
 
-" 4 space tabs for various filetypes
+" files w/ 4 space indentation
 autocmd Filetype php setlocal ts=4 sts=4 sw=4
-autocmd Filetype python setlocal ts=4 sts=4 sw=4
 autocmd Filetype glsl setlocal ts=4 sts=4 sw=4
+autocmd Filetype typescript setlocal ts=4 sts=4 sw=4
+
+" python indentation
+au BufNewFile,BufRead *.py
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix
+
 
 " Always paste in paste mode
 function! WrapForTmux(s)

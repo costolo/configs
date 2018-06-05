@@ -1,9 +1,11 @@
+export AISLES_PATH=/Users/bencostolo/Projects/phido/aisles
+export ADMIN_PATH=/Users/bencostolo/Projects/phido/aisles-admin
+export ECOMM_PATH=/Users/bencostolo/Projects/phido/aisles-ecomm
+export PHIDO_API_PATH=/Users/bencostolo/Projects/phido/api
+
 # aws profile
 export AWS_PROFILE="pfs-staging"
 export AWS_REGION="us-east-1"
-
-# $VARIABLE will render before the rest of the command is executed
-echo "Logged in as $USER at $(hostname)"
 
 # because duh
 source ~/.bashrc
@@ -27,6 +29,12 @@ test -d /usr/local/heroku/ && export PATH="/usr/local/heroku/bin:$PATH"
 
 # Path for NVM
 export PATH="/Users/bencostolo/.nvm/versions/node/v6.10.1/lib:$PATH"
+
+# Path for composer
+export PATH="~/.composer/vendor/bin:$PATH"
+
+# Path for php
+export PATH="/usr/local/Cellar/php/7.2.4/bin:$PATH"
 
 # A more colorful prompt
 # \[\e[0m\] resets the color to default color
@@ -110,15 +118,6 @@ alias dev="git co develop"
 alias a="git add -A && git commit -v"
 alias ng="ngrok http 10.0.0.130:80"
 
-# useful functions (legacy at this point because tmux handles this well but why not keep it anyway)
-function tn {
-  printf "\e]1;$1\a"
-}
-
-function wn {
-  printf "\e]2;$1\a"
-}
-
 # find text in cwd
 findText() {
   find ./ -not \( -path node_modules -prune \) -not \( -path vendor -prune \) -not \( -path \.git -prune \) -type f  -exec grep -H "$1" {} \;
@@ -142,3 +141,8 @@ export NVM_DIR="$HOME/.nvm"
 
 awsphi-qa
 
+export PATH="$HOME/.cargo/bin:$PATH"
+
+
+# $VARIABLE will render before the rest of the command is executed
+echo "Logged in as $USER at $(hostname)"

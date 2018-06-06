@@ -1,0 +1,68 @@
+{
+    "vim.insertModeKeyBindings": [
+        {
+            "before": [
+                "leader",
+                "leader"
+            ],
+            "after": [
+                "<C-o>",
+                "$"
+            ],
+        }
+    ],
+    "vim.otherModesKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "leader",
+                "w"
+            ],
+            "after": [],
+            "commands": [
+                {
+                    "command": "workbench.action.files.save",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": [
+                "leader",
+                "q"
+            ],
+            "after": [],
+            "commands": [
+                {
+                    "command": "workbench.action.files.save",
+                },
+                // {
+                //     "command": "workbench.action.closeActiveEditor",
+                // }
+            ]
+        },
+        {
+            "before": [
+                "leader",
+                "y"
+            ],
+            "commands": {
+                "command": "editor.action.clipboardCopyAction"
+            }
+        },
+        {
+            "before": [
+                "<C-f>"
+            ],
+            "commands": [
+                {
+                    "command": "editor.action.formatDocument"
+                }
+            ]
+        }
+    ],
+    "vim.leader": "<space>",
+    "vim.sneak": true,
+    "vim.statusBarColorControl": true,
+    "vim.timeout": 200,
+    "vim.useSystemClipboard": false
+}

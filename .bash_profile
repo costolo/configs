@@ -1,17 +1,20 @@
-export AISLES_PATH=/Users/bencostolo/Projects/phido/aisles
-export ADMIN_PATH=/Users/bencostolo/Projects/phido/aisles-admin
-export ECOMM_PATH=/Users/bencostolo/Projects/phido/aisles-ecomm
-export PHIDO_API_PATH=/Users/bencostolo/Projects/phido/api
+export AISLES_PATH=/Users/ben/projects/phido/aisles
+export ADMIN_PATH=/Users/ben/projects/phido/aisles-admin
+export ECOMM_PATH=/Users/ben/projects/phido/aisles-ecomm
+export PHIDO_API_PATH=/Users/ben/projects/phido/api
 
-# aws profile
-export AWS_PROFILE="pfs-staging"
-export AWS_REGION="us-east-1"
+alias aws-pf='export AWS_PROFILE=petflow-aws;'
+alias aws-phido-qa='unset AWS_REGION; export AWS_PROFILE="phido-aws-qa";'
+alias aws-phido='unset AWS_REGION; export AWS_PROFILE="phido-aws-production";'
+alias aws-pfs-mobile='export AWS_REGION='us-west-1'; export AWS_PROFILE="phillips-aws";'
+
+aws-phido-qa
+
+# virtualenv
+source "/usr/local/bin/virtualenvwrapper.sh"
 
 # because duh
 source ~/.bashrc
-
-# thefuck alias
-eval $(thefuck --alias)
 
 # Rbenv autocomplete and shims
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
@@ -19,6 +22,7 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 # Path for RBENV
 test -d $HOME/.rbenv/ && PATH="$HOME/.rbenv/bin:$PATH"
 
+# Path for python2
 export PATH="/Users/bencostolo/Library/Python/2.7/bin/:$PATH"
 
 # Path for brew
@@ -26,9 +30,6 @@ test -d /usr/local/bin && export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PAT
 
 # Path for Heroku
 test -d /usr/local/heroku/ && export PATH="/usr/local/heroku/bin:$PATH"
-
-# Path for NVM
-export PATH="/Users/bencostolo/.nvm/versions/node/v6.10.1/lib:$PATH"
 
 # Path for composer
 export PATH="~/.composer/vendor/bin:$PATH"
@@ -81,21 +82,12 @@ export GREP_OPTIONS='--color=always'
 #set vim as the default editor
 export EDITOR="vim"
 
-# git autocompletion
-if [ -f ~/.git-completion.bash ]; then
-  . ~/.git-completion.bash
-  
-  # Add git completion to aliases
-  __git_complete g __git_main
-  __git_complete pl _git_pull_origin
-fi
-
 # a plethora of aliases
 alias e=subl
 alias be="bundle exec"
 alias simpleserver="python -m SimpleHTTPServer"
 alias gap="git add -p"
-alias gcv="git commit -v"
+alias c="git commit -v"
 alias r="ruby"
 alias sc="rails c --sandbox"
 alias s="rails s"
@@ -107,16 +99,21 @@ alias wp="node_modules/.bin/webpack"
 alias nukeModules="rm -rf /node_modules && yarn"
 alias v="vagrant ssh"
 alias push="git push origin HEAD"
-alias pull="git pull origin HEAD"
-alias g="git"
-alias awsphi-prod='unset AWS_ACCESS_KEY_ID; unset AWS_SECRET_ACCESS_KEY; export AWS_PROFILE="pfs-production";'
-alias awsphi-qa='unset AWS_ACCESS_KEY_ID; unset AWS_SECRET_ACCESS_KEY; export AWS_PROFILE="pfs-staging";'
 alias reload="source ~/.bash_profile"
-alias ac="git add -A && git commit -v"
 alias errqa="awslogs get Aisles/error-logs --start='2 hours ago'"
 alias dev="git co develop"
 alias a="git add -A && git commit -v"
-alias ng="ngrok http 10.0.0.130:80"
+alias ngk="ngrok http 10.0.0.130:80"
+alias h="./develop artisan horizon:terminate && echo 'terminated' && ./develop artisan horizon"
+alias deploy_stage='ansible-playbook deploy_stage.yml --private-key keys/stage.pem -e'
+alias stack='./develop down && ./develop up -d'
+alias du='docker-compose up -d'
+alias vu='vagrant up && vagrant provision'
+alias co='git checkout'
+alias br='git branch'
+alias st='git status'
+alias gp='git pull'
+alias merge='git merge'
 
 # find text in cwd
 findText() {
@@ -128,21 +125,23 @@ export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-#git autocomplete
-if [ -f ~/.git-completion.bash ]; then
-  . ~/.git-completion.bash
+# setup git autocompletion
+if [ -f "/usr/local/etc/bash_completion" ]; then
+  source /usr/local/etc/bash_completion
+  __git_complete co _git_checkout
+  __git_complete gp _git_pull
+  __git_complete br _git_branch
+  __git_complete merge _git_merge
+else
+  echo "Error loading git completions"
 fi
 
 #load RVM into a shell session *as a function*
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
-awsphi-qa
-
-export PATH="$HOME/.cargo/bin:$PATH"
-
-
-# $VARIABLE will render before the rest of the command is executed
 echo "Logged in as $USER at $(hostname)"
+export PATH="/usr/local/opt/ansible@1.9/bin:$PATH"
+
+#nvm
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
